@@ -1,0 +1,12 @@
+import pandas as pd
+import pyodbc
+
+server="DESKTOP-VQNFD07"
+verıtabanı="okul"
+bgn=pyodbc.connect('DRIVER={SQL Server};SERVER=' + server +';DATABASE=' + verıtabanı+';Trusted_Connection=yes')
+sql="""
+SELECT* FROM sınıf1
+
+"""
+veri=pd.read_sql(sql,bgn)
+veri.head(3)
