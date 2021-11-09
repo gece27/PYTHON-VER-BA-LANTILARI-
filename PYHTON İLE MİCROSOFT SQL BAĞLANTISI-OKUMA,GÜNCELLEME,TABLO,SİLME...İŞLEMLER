@@ -1,0 +1,39 @@
+#genel kod
+db=pyodbc.connect(
+"Driver={SQL Server};"
+"Server=DESKTOP-VQNFD07;"
+"Database=Okul;"
+"Trusted_Connection=yes;"
+
+)
+v=db.cursor()
+
+def oku():
+		v.execute("select * from sınıf1")
+    x=v.fetchall()
+    print(x)
+def olustur():
+    v.execute("create table sınıf2(id int primary key identity(1,1),dersad varchar(20),dersnot varchar(3))")
+    db.commit() #burada db
+    
+def veri_ekle(dersad,dersnot):
+    v.execute("insert into sınıf2 values(?,?)",(dersad,dersnot))
+    v.commit() #burada v
+ 
+    dersad=input("ders adı yaz:")
+    dersnot=int(input("ders notu yaz:"))
+    
+def guncelle():
+    v.execute("update sınıf2 set dersad='ukraynaca' where dersad='fransızca' " )
+    v.commit()
+    
+def sil():
+    v.execute("delete from sınıf2 where dersnot='80'")
+    v.commit()
+    
+#olustur()
+#veri_ekle(dersad,dersnot)
+#guncelle()
+sil()
+
+db.close()
